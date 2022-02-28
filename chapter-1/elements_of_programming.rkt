@@ -9,17 +9,20 @@
 
 ; this is how we define funcitons:
 ; (define (<name of the function> <parameters>) <function body>)
-(define (square x) (* x x))
+(define (square x)
+  (* x x))
 
 (square 5)
 
 ; note: defining functions and 'variables' are both accomplished by the `define` special form
-; this fill define a function which just gives back the number 5
-(define (y) 5)
+; this will define a function which just gives back the number 5
+(define (y)
+  5)
 
 (+ x (y))
 
-(define (sum-of-squares x y) (+ (square x) (square y)))
+(define (sum-of-squares x y)
+  (+ (square x) (square y)))
 
 (define (f a)
   (sum-of-squares (+ a 1) (* a 2)))

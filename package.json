@@ -1,0 +1,21 @@
+{
+  "name": "sicp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brailor/sicp.git"
+  },
+  "author": "Viktor Ohad",
+  "private": "true",
+  "license": "ISC",
+  "scripts": {
+    "fmt": "raco fmt -i **/*.rkt",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "lint-staged": "^12.3.4",
+    "husky": "^7.0.4"
+  },
+  "lint-staged": {
+    "*.rkt": "npm run fmt"
+  }
+}
