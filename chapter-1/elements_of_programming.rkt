@@ -61,6 +61,16 @@
 ; (+ 36 100)
 ; 136
 
+; ex: 1.3
+; Define a procedure that takes three numbers as arguments and return
+; the sum of the squares of the two larger numbers.
+(define (sum-of-largest-two-squares x y z)
+  (sum-of-squares (max x y) (max (min x y) z)))
+
+(sum-of-largest-two-squares 1 2 3) ; 4 + 9 = 13
+(sum-of-largest-two-squares 3 1 2) ; 9 + 4 = 13
+
+; ex: 1.4
 ; interesting: the result of the `if` expression +/- is used for the `a b` block
 (define (a-plus-abs-b a b)
   ((if (> b 0) + -) a b))
@@ -68,7 +78,7 @@
 (= (a-plus-abs-b 10 -5) 15) ;true
 (= (a-plus-abs-b 10 5) 15) ;true
 
-; ex 1.5 normal vs applicative order?
+; ex: 1.5 normal vs applicative order?
 (define (p)
   (p))
 
