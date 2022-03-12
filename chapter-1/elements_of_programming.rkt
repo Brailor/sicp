@@ -28,6 +28,7 @@
   (sum-of-squares (+ a 1) (* a 2)))
 
 (f 5)
+; --- applicative order evaulation ---
 ; evaulation of (f 5)
 ; retrieve the body of `f`
 ; which is: (sum-of-squares (+ a 1) (* a 2))
@@ -48,3 +49,45 @@
 ; and then finally:
 ; 136
 ; this is called substitution model for procedure applicaiton
+
+; --- normal order evaulation ---
+; (f 5)
+; first substitute operand expressions for parameters until it obtained an expression involving only
+; primitive operators, and would then perform the evaluation
+; (sum-of-squares (+ 5 1) (* 5 2))
+; (+ (square (+ 5 1)) (square (* 5 2)) )
+; (+ (* (+ 5 1) (+ 5 1) (* (* 5 2) (* 5 2)) )
+; (+ (* 6 6) (* 10 10) )
+; (+ 36 100)
+; 136
+
+; interesting: the result of the `if` expression +/- is used for the `a b` block
+(define (a-plus-abs-b a b)
+  ((if (> b 0) + -) a b))
+
+(= (a-plus-abs-b 10 -5) 15) ;true
+(= (a-plus-abs-b 10 5) 15) ;true
+
+; ex 1.5 normal vs applicative order?
+(define (p)
+  (p))
+
+(define (test x y)
+  (if (= x 0) 0 y))
+
+; in applicative order this would be an infinite loop
+(test 0 (p))
+
+; evaulation in applicative order
+; (test 0 (p))
+; get result of sub-expressions:
+; (test 0 (p))
+; (p)
+; (p)
+;... infinite loop
+
+; evaulation in normal order
+; (test 0 (p))
+; retrieve the body of `test`:
+; (if (= 0 0) 0 (p))
+; since 0 = 0 the else block won't be run, so no infinite loop in normal order case
