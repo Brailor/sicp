@@ -86,7 +86,7 @@
   (if (= x 0) 0 y))
 
 ; in applicative order this would be an infinite loop
-(test 0 (p))
+; (test 0 (p))
 
 ; evaulation in applicative order
 ; (test 0 (p))
@@ -101,3 +101,41 @@
 ; retrieve the body of `test`:
 ; (if (= 0 0) 0 (p))
 ; since 0 = 0 the else block won't be run, so no infinite loop in normal order case
+
+(define (sqrt-iter guess x)
+  (if (good-enough? guess x) guess (sqrt-iter (improve guess x) x)))
+
+(define (good-enough? guess x)
+  (< (abs (- (square guess) x)) 0.001))
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+(define (average x y)
+  (/ (+ x y) 2))
+
+(define (sqrt x)
+  (sqrt-iter 1.0 x))
+
+(sqrt 9)
+
+; ex: 1.6
+; rewrite `if` speciaf form into `cond`
+(define (new-if predicate then-clause else-clause)
+  (cond
+    [predicate then-clause]
+    [else else-clause]))
+
+(define (sqrt-iter-2 guess x)
+  (new-if (good-enough? guess x) guess (sqrt-iter-2 (improve guess x) x)))
+
+(define (sqrt-2 x)
+  (sqrt-iter-2 1.0 x))
+
+; this will run into an infinite loop, but why?
+; (sqrt-2 9)
+; it will result in an infinite loop because of the behaviour of applicative order evaulation:
+; the `new-if` function is not a special form, which means the interpreter will try to
+; calculate all of it's sub-expressions, which in the case of:
+; (new-if (predicate) true-case else-case) else-case -> is a recursive call to:
+; `sqrt-iter-2` which in turn will call it self and thus an infinte loop will occur
