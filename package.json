@@ -16,6 +16,6 @@
     "husky": "^7.0.4"
   },
   "lint-staged": {
-    "*.rkt": "npm run fmt"
+    "*.rkt": "raco fmt -i"
   }
 }
