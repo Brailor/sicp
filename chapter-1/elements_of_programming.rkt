@@ -139,3 +139,16 @@
 ; calculate all of it's sub-expressions, which in the case of:
 ; (new-if (predicate) true-case else-case) else-case -> is a recursive call to:
 ; `sqrt-iter-2` which in turn will call it self and thus an infinte loop will occur
+
+; lexical scoping and block structure in effect:
+(define (sqrt-3 x)
+  (define (good-enough-loc? guess)
+    (< (abs (- (square guess) x)) 0.001))
+
+  (define (improve-loc guess)
+    (average guess (/ x guess)))
+  (define (sqrt-iter-loc guess)
+    (if (good-enough-loc? guess) guess (sqrt-iter-loc (improve-loc guess))))
+  (sqrt-iter-loc 1.0))
+
+(sqrt-3 9.0)
