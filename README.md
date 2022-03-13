@@ -1,0 +1,2 @@
+# Notes for SICP
+In this repo I will store my [notes](/notes.md) for the book [SICP (Structure and Interpretation of Computer Programs)](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-1.html#titlepage).
