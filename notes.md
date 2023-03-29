@@ -81,3 +81,6 @@ Then its evaulation would be:
 Which would classify it as linear recursive process.
 
 The easiest way to spot that the second process is recursive is to note that the (recursive) `+` call is inside a sub-expression, while in the first example the `+` call is the first expression.
+
+
+### Formulating Abstractions with Higher-Order Procedures
